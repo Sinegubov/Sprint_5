@@ -11,19 +11,19 @@ def test_successful_registration(run_webdriver):
     driver = run_webdriver
 
     driver.find_element(By.XPATH, "//input[@name='name']").send_keys("Pavel")
-    driver.find_element(By.XPATH, "(//input[@name='name'])[2]").send_keys("sinegubov_8@gmail.com")
+    driver.find_element(By.XPATH, "(//input[@name='name'])[2]").send_keys("pavelsinegubov8123@gmail.com")
     driver.find_element(By.XPATH, "//input[@name='Пароль']").send_keys("123456")
 
     driver.find_element(By.XPATH, "//button[text()='Зарегистрироваться']").click()
 
 
 @pytest.mark.url(url)
-def test_failed_registration(run_webdriver):
+def test_failed_registration_wrong_password(run_webdriver):
 
     driver = run_webdriver
 
-    driver.find_element(By.XPATH, "//input[@name='name']").send_keys("Pavel")
-    driver.find_element(By.XPATH, "(//input[@name='name'])[2]").send_keys("sinegubov_8@gmail.com")
+    driver.find_element(By.XPATH, "//input[@name='name']").send_keys("Ivan")
+    driver.find_element(By.XPATH, "(//input[@name='name'])[2]").send_keys("fail_ivan@gmail.com")
     driver.find_element(By.XPATH, "//input[@name='Пароль']").send_keys("1")
 
     driver.find_element(By.XPATH, "//button[text()='Зарегистрироваться']").click()
