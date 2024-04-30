@@ -1,35 +1,26 @@
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
-import pytest
-
-url = "https://stellarburgers.nomoreparties.site/register"
-
-
-@pytest.mark.url(url)
-def test_successful_registration(run_webdriver):
-    driver = run_webdriver
-
-    driver.find_element(By.XPATH, "//input[@name='name']").send_keys("Pavel")
-    driver.find_element(By.XPATH, "(//input[@name='name'])[2]").send_keys("pavelsinegubov8123@gmail.com")
-    driver.find_element(By.XPATH, "//input[@name='Пароль']").send_keys("123456")
-
-    driver.find_element(By.XPATH, "//button[text()='Зарегистрироваться']").click()
+from locators import RegistrationLoc
+import data
 
 
-@pytest.mark.url(url)
-def test_failed_registration_wrong_password(run_webdriver):
+class TestRegistration:
 
-    driver = run_webdriver
+    def test_successful_registration(self, wb):
+        wb.get(data.URL.REG_PAGE)
+        wb.find_element(*RegistrationLoc.name_input).send_keys(data.UserCredential.NAME)
+        wb.find_element(*RegistrationLoc.email_input).send_keys(data.UserCredential.EMAIL)
+        wb.find_element(*RegistrationLoc.password_input).send_keys(data.UserCredential.PASSWORD)
+        wb.find_element(*RegistrationLoc.reg_btn).click()
 
-    driver.find_element(By.XPATH, "//input[@name='name']").send_keys("Ivan")
-    driver.find_element(By.XPATH, "(//input[@name='name'])[2]").send_keys("fail_ivan@gmail.com")
-    driver.find_element(By.XPATH, "//input[@name='Пароль']").send_keys("1")
+    def test_failed_registration_wrong_password(self, wb):
+        wb.get(data.URL.REG_PAGE)
+        wb.find_element(*RegistrationLoc.name_input).send_keys(data.UserCredential.NAME)
+        wb.find_element(*RegistrationLoc.email_input).send_keys(data.UserCredential.EMAIL)
+        wb.find_element(*RegistrationLoc.password_input).send_keys(data.UserCredential.bad_password())
+        wb.find_element(*RegistrationLoc.reg_btn).click()
 
-    driver.find_element(By.XPATH, "//button[text()='Зарегистрироваться']").click()
+        WebDriverWait(wb, 3).until(expected_conditions.visibility_of_element_located
+                                   (RegistrationLoc.error_invalid_password))
 
-    WebDriverWait(driver, 3).until(expected_conditions.visibility_of_element_located((
-        By.XPATH, "//p[@class='input__error text_type_main-default']")))
-
-    status = driver.find_element(By.XPATH, "//p[@class='input__error text_type_main-default']").text
-    assert status == "Некорректный пароль"
+        assert wb.find_element(*RegistrationLoc.error_invalid_password).text == "Некорректный пароль"
