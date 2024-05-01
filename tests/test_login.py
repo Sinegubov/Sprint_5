@@ -20,7 +20,7 @@ class TestLogin:
         order_btn = wb.find_element(*MainPageLoc.order_button).text
         assert wb.current_url == data.URL.MAIN_PAGE and (order_btn == 'Оформить заказ')
 
-    def test_successful_login_button_personal_cabinet(self, wb):
+    def test_successful_login_button_from_personal_cabinet(self, wb):
         wb.get(data.URL.MAIN_PAGE)
         wb.find_element(*AuthLoc.lk_btn).click()
         self.login(wb)

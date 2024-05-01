@@ -25,3 +25,32 @@ class AuthLoc:
 class MainPageLoc:
     h1_header = (By.TAG_NAME, "h1")  # Заголовок h1 на главной странице "Соберите бургер"
     order_button = (By.XPATH, "//button[text()='Оформить заказ']")  # Кнопка оформить заказ
+    user_space = (By.XPATH, "//a[@href='/account']")  # Надпись "Личный кабинет"
+    buns_construct_btn = (
+        By.XPATH,
+        "//section[@class='BurgerIngredients_ingredients__1N8v2']//div"
+    )  # Раздел конструктора бургера "Булки" на главной странице
+    buns_construct_text = (By.XPATH, "//h2[text()='Булки']")  # Заголовок каталога конструктора бургера "Булки"
+    sauses_construct_btn = (
+        By.XPATH,
+        "//span[text()='Соусы']")  # Раздел конструктора бургера "Соусы" на главной странице
+    sauses_construct_text = (
+        By.XPATH, "//h2[text()='Соусы']"
+    )  # Заголовок каталога конструктора бургера "Соусы"
+    fillings_construct_btn = (
+        By.XPATH, "//span[text()='Начинки']"
+    )  # Раздел конструктора бургера "Начинки" на главной странице
+    fillings_construct_text = (By.XPATH, "//h2[text()='Начинки']")  # Заголовок каталога конструктора бургера "Начинки"
+
+
+class UserSpace:
+    user_info = (By.XPATH, "//li[@class='Account_listItem__35dAP']")  # Ссылка на профиль пользователя
+    profile_email = (
+        By.XPATH,
+        "(//input[contains(@class,'text input__textfield')])[2]"
+    )  # Поле c информацией о email пользователя
+    logout_btn = (By.XPATH, "//button[@type='button']")  # Кнопка выход
+    logo_btn = (
+        By.XPATH, ".//div[@class = 'AppHeader_header__logo__2D0X2']")  # Кнопка Логотип для перехода в конструктор
+    constructor_btn = (
+        By.XPATH, "//a[@class='AppHeader_header__link__3D_hX']")   # Кнопка Конструктор для перехода в конструктор

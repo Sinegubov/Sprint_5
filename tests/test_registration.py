@@ -13,6 +13,13 @@ class TestRegistration:
         wb.find_element(*RegistrationLoc.password_input).send_keys(data.UserCredential.PASSWORD)
         wb.find_element(*RegistrationLoc.reg_btn).click()
 
+    def test_successful_registration_with_random_cred(self, wb):
+        wb.get(data.URL.REG_PAGE)
+        wb.find_element(*RegistrationLoc.name_input).send_keys(data.RandomCredential.NAME)
+        wb.find_element(*RegistrationLoc.email_input).send_keys(data.RandomCredential.EMAIL)
+        wb.find_element(*RegistrationLoc.password_input).send_keys(data.RandomCredential.PASSWORD)
+        wb.find_element(*RegistrationLoc.reg_btn).click()
+
     def test_failed_registration_wrong_password(self, wb):
         wb.get(data.URL.REG_PAGE)
         wb.find_element(*RegistrationLoc.name_input).send_keys(data.UserCredential.NAME)
