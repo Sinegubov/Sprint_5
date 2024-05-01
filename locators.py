@@ -49,7 +49,7 @@ class UserSpace:
         By.XPATH,
         "(//input[contains(@class,'text input__textfield')])[2]"
     )  # Поле c информацией о email пользователя
-    logout_btn = (By.XPATH, "//button[@type='button']")  # Кнопка выход
+    logout_btn = (By.XPATH, ".//button[text()='Выход']")  # Кнопка выход
     logo_btn = (
         By.XPATH, ".//div[@class = 'AppHeader_header__logo__2D0X2']")  # Кнопка Логотип для перехода в конструктор
     constructor_btn = (
