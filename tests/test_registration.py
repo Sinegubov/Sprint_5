@@ -1,17 +1,10 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
-from locators import RegistrationLoc
+from locators import RegistrationLoc, AuthLoc
 import data
 
 
 class TestRegistration:
-
-    def test_successful_registration(self, wb):
-        wb.get(data.URL.REG_PAGE)
-        wb.find_element(*RegistrationLoc.name_input).send_keys(data.UserCredential.NAME)
-        wb.find_element(*RegistrationLoc.email_input).send_keys(data.UserCredential.EMAIL)
-        wb.find_element(*RegistrationLoc.password_input).send_keys(data.UserCredential.PASSWORD)
-        wb.find_element(*RegistrationLoc.reg_btn).click()
 
     def test_successful_registration_with_random_cred(self, wb):
         wb.get(data.URL.REG_PAGE)
@@ -19,6 +12,8 @@ class TestRegistration:
         wb.find_element(*RegistrationLoc.email_input).send_keys(data.RandomCredential.EMAIL)
         wb.find_element(*RegistrationLoc.password_input).send_keys(data.RandomCredential.PASSWORD)
         wb.find_element(*RegistrationLoc.reg_btn).click()
+        WebDriverWait(wb, 10).until(expected_conditions.visibility_of_element_located(AuthLoc.login_btn))
+        assert wb.current_url == data.URL.LOGIN_PAGE
 
     def test_failed_registration_wrong_password(self, wb):
         wb.get(data.URL.REG_PAGE)
