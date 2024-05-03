@@ -1,6 +1,7 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from locators import RegistrationLoc, AuthLoc
+from helpers import Password
 import data
 
 
@@ -19,7 +20,7 @@ class TestRegistration:
         wb.get(data.URL.REG_PAGE)
         wb.find_element(*RegistrationLoc.name_input).send_keys(data.UserCredential.NAME)
         wb.find_element(*RegistrationLoc.email_input).send_keys(data.UserCredential.EMAIL)
-        wb.find_element(*RegistrationLoc.password_input).send_keys(data.UserCredential.bad_password())
+        wb.find_element(*RegistrationLoc.password_input).send_keys(Password.bad_password())
         wb.find_element(*RegistrationLoc.reg_btn).click()
 
         WebDriverWait(wb, 3).until(expected_conditions.visibility_of_element_located

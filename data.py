@@ -13,13 +13,6 @@ class UserCredential:
     EMAIL = "pavelsinegubov8123@gmail.com"
     PASSWORD = "123456"
 
-    @staticmethod
-    def bad_password(pass_len=5):
-        password = ""
-        for i in range(int(pass_len)):
-            password += f'{randint(0, 9)}'
-        return password
-
 
 class RandomCredential:
     NAME = 'Новый пользователь'

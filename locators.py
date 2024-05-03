@@ -16,7 +16,7 @@ class AuthLoc:
     password_input = (By.NAME, "Пароль")  # Поле ввода пароля
     login_btn = (By.XPATH, "//button[text()='Войти']")  # Кнопка войти
     login_main_btn = (By.XPATH, "//button[text()='Войти в аккаунт']")  # Кнопка войти в аккаунт на главной странице
-    lk_btn = (By.XPATH, "// p[text() = 'Личный Кабинет']")  # Кнопка личного кабинета
+    lk_btn = (By.XPATH, "//a[@href='/account']")  # Кнопка личного кабинета
     reg_btn = (By.XPATH, "//a[@class='Auth_link__1fOlj']")  # Кнопка Зарегистрироваться в личном кабинете
     recovery_btn = (By.XPATH, "(//a[@class='Auth_link__1fOlj'])[2]")  # Кнопка восстановления пароля
     recover_login_btn = (By.CLASS_NAME, "Auth_link__1fOlj")  # Кнопка Войти из формы восстановления пароля
@@ -44,7 +44,9 @@ class MainPageLoc:
 
 
 class UserSpace:
-    user_info = (By.XPATH, "//li[@class='Account_listItem__35dAP']")  # Ссылка на профиль пользователя
+    user_info = (
+        By.XPATH, "//p[contains(@class,'Account_text__fZAIn text text_type_main-default')]"
+    )  # Ссылка на профиль пользователя
     profile_email = (
         By.XPATH,
         "(//input[contains(@class,'text input__textfield')])[2]"
